@@ -49,24 +49,22 @@
                         // Menghitung selisih hari antara tanggal kembali dan tanggal pinjam
                         $selisih_hari = floor(($tgl_kembali - $tgl_pinjam) / (60 * 60 * 24));
 
-                        if ($selisih_hari == 0 || $selisih_hari == 1 || $selisih_hari > 2) {
-                        // Jika tanggal kembali adalah pada tanggal yang sama atau 1 hari setelah tanggal peminjaman
-                        echo '<div style="background-color: #3EC70B; height: 1.7rem; text-align: center; color: white; margin-top: 0.5rem; border-radius: 7px;">Sudah Kembali</div>';
-                        } else {
-                            // Jika tidak, maka belum kembali
-                        echo '<div style="background-color: red; height: 1.7rem; text-align: center; color: white; margin-top: 0.5rem; border-radius: 7px;">Belum Kembali</div>';
+                        if ($selisih_hari == 0 || $selisih_hari == 1 ) {
+                        $status = "sudah kembali" ;
+                        echo '<div style="background-color: #3EC70B; height: 1.7rem; text-align: center; color: white; margin-top: 0.5rem; border-radius: 7px;"> ' . $status .' </div>';
+                        }elseif ( $selisih_hari > 2) {
+                        $status = "sudah kembali" ;
+                        echo '<div style="background-color: #E9B824; height: 1.7rem; text-align: center; color: white; margin-top: 0.5rem; border-radius: 7px;"> ' . $status .' </div>';
+                        } 
+                        else {
+                        $status = "belum kembali" ;
+                        echo '<div style="background-color: red; height: 1.7rem; text-align: center; color: white; margin-top: 0.5rem; border-radius: 7px;">' . $status .' </div>';
                         }
                     ?>
                   </td> 
                   <td> 
                     <?php
-                        $tgl_kembali = strtotime($row["tgl_kembali"]);
-                        $tgl_pinjam = strtotime($row['tgl_pinjam']);
-
-                        // Menghitung selisih hari antara tanggal kembali dan tanggal pinjam
-                        $selisih_hari = floor(($tgl_kembali - $tgl_pinjam) / (60 * 60 * 24));
-
-                        if ($selisih_hari != 0 && $selisih_hari != 1) {
+                        if ($status == 'belum kembali') {
                             // Menampilkan tautan edit hanya jika tanggal kembali bukan pada tanggal yang sama atau 1 hari setelah tanggal peminjaman
                             echo '<a href="' . BASE_URL . '/pinjam/edit/' . $row['id'] . '" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>';
                         }

@@ -12,12 +12,12 @@
                 <input type="text" class="form-control " name="nama_peminjam" id="nama_peminjam">    
             </div>
             <div class="form-group mb-3 ">
-                <label for="status">Jenis Barang</label>
-                <select class="form-control" name="jenis_barang" id="jenis_barang">
-                    <option disabled hidden selected>Pilih Barang</option>
-                    <option value="Laptop">Laptop</option>
-                    <option value="HP">HP</option>
-                    <option value="Adaptor LAN">Adaptor LAN</option>
+            <label for="status">Jenis Barang</label>
+                <select class="form-control" name="jenis_barang" id="jenis_barang" >
+                    <option disabled hidden selected>Pilih Jenis</option>
+                    <option value="Laptop" <?= $data['jenis_barang_value'] == 'Laptop' ? 'selected' : '' ?>>Laptop</option>
+                    <option value="HP" <?= $data['jenis_barang_value'] == 'HP' ? 'selected' : '' ?>>HP</option>
+                    <option value="Adaptor LAN" <?= $data['jenis_barang_value'] == 'Adaptor LAN' ? 'selected' : '' ?>>Adaptor LAN</option>
                 </select>
             </div>
            <div class="form-group mb-3 ">

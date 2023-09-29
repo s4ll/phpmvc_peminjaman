@@ -13,18 +13,16 @@ class Pinjam extends Controller{
 
     public function tambah($msg = NULL)
     {
-        
-        $data['judul'] = 'Tambah Pinjaman' ;
-        $data['info'] = $msg ;
+        $data['judul'] = 'Tambah Pinjam';
+        $data['pesan'] = $msg;
         $data['nama_peminjam_value'] = isset($_POST['nama_peminjam']) ? $_POST['nama_peminjam'] : '';
         $data['jenis_barang_value'] = isset($_POST['jenis_barang']) ? $_POST['jenis_barang'] : '';
         $data['no_barang_value'] = isset($_POST['no_barang']) ? $_POST['no_barang'] : '';
         $data['tgl_pinjam_value'] = isset($_POST['tgl_pinjam']) ? $_POST['tgl_pinjam'] : '';
-        $this->view('templates/header' , $data) ;
-        $this->view('pinjam/create' ) ;
+        $this->view('templates/header', $data);
+        $this->view('pinjam/create', $data);
         $this->view('templates/footer');
     }
-
     public function simpanPinjam()
     {
         $_POST['tgl_kembali'] = date('Y-m-d H:i:s', strtotime($_POST['tgl_pinjam'] . ' +2 days'));
