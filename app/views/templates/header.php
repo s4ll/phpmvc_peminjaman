@@ -8,9 +8,9 @@
     <title> MVC - Halaman <?=$data['judul']?> </title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-primary mb-3">
+    <nav class="navbar navbar-expand-lg mb-3" style="background-color: #053B50;">
         <div class="container">
-            <a class="navbar-brand font-weight-bold text-white" href="<?= BASE_URL ?>/home/index">PHP MVC</a>
+            <a class="navbar-brand font-weight-bold text-white" href="<?= BASE_URL ?>/home/index">INVENTARIS</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

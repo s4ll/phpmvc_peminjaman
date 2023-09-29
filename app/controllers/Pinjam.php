@@ -11,10 +11,15 @@ class Pinjam extends Controller{
         $this->view('templates/footer');
     }
 
-    public function tambah()
+    public function tambah($msg = NULL)
     {
         
         $data['judul'] = 'Tambah Pinjaman' ;
+        $data['info'] = $msg ;
+        $data['nama_peminjam_value'] = isset($_POST['nama_peminjam']) ? $_POST['nama_peminjam'] : '';
+        $data['jenis_barang_value'] = isset($_POST['jenis_barang']) ? $_POST['jenis_barang'] : '';
+        $data['no_barang_value'] = isset($_POST['no_barang']) ? $_POST['no_barang'] : '';
+        $data['tgl_pinjam_value'] = isset($_POST['tgl_pinjam']) ? $_POST['tgl_pinjam'] : '';
         $this->view('templates/header' , $data) ;
         $this->view('pinjam/create' ) ;
         $this->view('templates/footer');
@@ -24,13 +29,38 @@ class Pinjam extends Controller{
     {
         $_POST['tgl_kembali'] = date('Y-m-d H:i:s', strtotime($_POST['tgl_pinjam'] . ' +2 days'));
 
-        if ($this->model('PinjamModel')->tambahPinjam($_POST) > 0) {
-            header('location: ' . BASE_URL . '/Pinjam/index');
-            exit;
+        if (empty($_POST['nama_peminjam']) || empty($_POST['jenis_barang']) || empty($_POST['no_barang']) || empty($_POST['tgl_pinjam'])) {
+            $msg = "Data masih ada yang kosong Mohon isi kolom berikut: ";
+        
+            if (empty($_POST['nama_peminjam'])) {
+                $msg .= "Nama Peminjam,";
+            }
+        
+            if (empty($_POST['jenis_barang'])) {
+                $msg .= " Jenis Barang,";
+            }
+        
+            if (empty($_POST['no_barang'])) {
+                $msg .= " No Barang,";
+            }
+        
+            if (empty($_POST['tgl_pinjam'])) {
+                $msg .= " Tgl Pinjam";
+            }
+        
+            echo "<script>alert('$msg masih kosong');</script>";
+            $this->tambah($msg);
+            return;
         } else {
-            header('location: ' . BASE_URL . '/Pinjam/index');
-            exit;
+            if ($this->model('PinjamModel')->tambahPinjam($_POST) > 0) {
+                header('location: ' . BASE_URL . '/Pinjam/index');
+                exit;
+            } else {
+                header('location: ' . BASE_URL . '/Pinjam/index');
+                exit;
+            }
         }
+        
     }
 
     public function edit($id){

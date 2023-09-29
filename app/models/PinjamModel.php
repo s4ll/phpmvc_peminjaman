@@ -60,11 +60,15 @@ class PinjamModel{
         return $this->db->rowCount() ;
         
     }
-    public function cariPinjam($nama_peminjam)
+    public function cariPinjam($keyword)
     {
-        $this->db->query(" SELECT * FROM " . $this->table . " WHERE nama_peminjam LIKE :nama_peminjam ") ;
-        $this->db->bind('nama_peminjam' , '%' . $nama_peminjam . '%') ;
-        return $this->db->resultSet() ;
+        $query = "SELECT * FROM " . $this->table . " WHERE nama_peminjam LIKE :keyword OR jenis_barang LIKE :keyword";
+        $this->db->query($query);
         
+        // Bind parameter dengan kata kunci pencarian (tanpa tanda persen di sisi kanan)
+        $this->db->bind('keyword', '%' . $keyword . '%');
+        
+        return $this->db->resultSet();
     }
+    
 }
